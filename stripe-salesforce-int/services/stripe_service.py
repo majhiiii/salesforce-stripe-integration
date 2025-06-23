@@ -7,7 +7,6 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 def get_card_status(customer_id):
     try:
-        # Use payment_methods instead of legacy sources
         methods = stripe.PaymentMethod.list(
             customer=customer_id,
             type="card"
@@ -16,7 +15,7 @@ def get_card_status(customer_id):
         if not methods['data']:
             return "Invalid"
 
-        card = methods['data'][0]['card']  # Assume default card
+        card = methods['data'][0]['card'] 
         exp_month = int(card['exp_month'])
         exp_year = int(card['exp_year'])
 
